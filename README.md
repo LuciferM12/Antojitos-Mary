@@ -1,2 +1,2 @@
 # Antojitos-Mary
- Proyecto Ingeniería de Software i
+ Proyecto Ingeniería de Software I
