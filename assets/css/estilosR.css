@@ -200,6 +200,20 @@ header .iconos span:last-child{
     
 }
 
+.form-control:disabled, .form-control[readonly] {
+  background-color: #00010D;
+  opacity: 1;
+}
+
+#disabledInput{
+  display: none;
+}
+
+#disabledtext{
+  display: none;
+}
+
+
 @media (max-width:410px)
 {
     header .fecha-actual{
@@ -2356,10 +2370,6 @@ pre code {
   opacity: 1;
 }
 
-.form-control:disabled, .form-control[readonly] {
-  background-color: #00010D;
-  opacity: 1;
-}
 
 select.form-control:focus::-ms-value {
   color: #dee2e6;
