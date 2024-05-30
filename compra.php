@@ -8,6 +8,35 @@
     $rol = isset($_SESSION['rol']) ? $_SESSION['rol'] : ""; // Aquí se almacena el rol del usuario
 ?>
 
+<?php
+    // Establecer la conexión con la base de datos (reemplaza 'host', 'usuario', 'contraseña' y 'nombre_de_base_de_datos' con los valores correspondientes)
+    $conn = new mysqli("localhost","u222406285_Omar12", "IguanoPHPDev22", "u222406285__BD_IngSoft");
+    
+    // Verificar la conexión
+    if ($conn->connect_error) {
+        die("Conexión fallida: " . $conn->connect_error);
+    }
+
+    // Consulta SQL para obtener el teléfono y la contraseña del usuario
+    $sql = "SELECT telefono, password, idUsuario FROM Usuario WHERE nombre = '".$_SESSION['nombre']."'";
+
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        // Si se encontraron resultados, mostrarlos en los campos correspondientes
+        while($row = $result->fetch_assoc()) {
+            $telefono = $row['telefono'];
+            $contrasena = $row['contrasena'];
+            $idUsuario = $row['idUsuario'];
+        }
+    } else {
+        echo "No se encontraron resultados.";
+    }
+
+    // Cerrar la conexión con la base de datos
+    $conn->close();
+?>
+
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -114,7 +143,7 @@
             <div class="altaCompra">
                 <h1>Control de Venta de Restaurante</h1>
                 <!-- Select para seleccionar producto -->
-                <form class="formulario">
+                <form class="formulario" action="assets/script/altaCompra.php" method="post">
                     <label for="exampleFormControlSelect1">Seleccione un usuario:</label>
                     <select class="form-control" name="user" required>
                         <option value="">Seleccione un usuario</option>									
@@ -194,7 +223,10 @@
                                 </section>
                             </div>
                         </div>
+                        <input type="hidden" name="idUsuario" value="<?php echo htmlspecialchars($idUsuario); ?>">
+                        <input type="hidden" name="total" id="TotalCompra">
                         <h2 style="margin-top: 20px;">Total de la compra: $<span id="totalCompra">0.00</span></h2>
+                        <input type="hidden" name="fecha" id="fechaInput">
                         <button class="boton" type = "submit">Enviar</button>
                     </div>
             </form>
@@ -288,7 +320,10 @@
                     }
         
                     document.getElementById('totalCompra').textContent = totalCompra.toFixed(2);
+                    document.getElementById('TotalCompra').value = totalCompra.toFixed(2);
                 }
+                const fechaInput = document.querySelector('#fechaInput');
+                fechaInput.value = obtenerFechaActualSQL();
             </script>
         </div>
         

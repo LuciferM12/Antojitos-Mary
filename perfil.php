@@ -50,7 +50,7 @@
     <link rel="stylesheet" href="assets/vendors/animate/animate.css">
 
     <!-- Bootstrap + FoodHut main styles -->
-    <link rel="stylesheet" href="assets/css/estilosP.css">
+    <link rel="stylesheet" href="assets/css/estilosPerfil3.css">
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
     
@@ -166,7 +166,7 @@
                         <input type="hidden" name="idUsuario" value="<?php echo htmlspecialchars($idUsuario); ?>">
                         <button id="editButton" class="boton" onclick="enableEditMode()" type='button'>Editar</button>
                         <button id="saveButton" class="boton"  style="display:none;" type="submit">Guardar</button>
-                        <button id="cancelButton" class="boton" onclick="cancelEdit()" style="display:none;" type="buton">Cancelar</button>
+                        <button id="cancelButton" class="boton" onclick="cancelEdit()" style="display:none;" type='button'>Cancelar</button>
                      </form>
                 </div>
            

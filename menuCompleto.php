@@ -92,7 +92,7 @@
                         <a class="nav-link" href="#testmonial">Reportes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#testmonial">Venta</a>
+                        <a class="nav-link" href="compra.php">Venta</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="perfil.php"><?php echo htmlspecialchars($_SESSION['nombre']); ?></a>
