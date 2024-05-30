@@ -105,10 +105,10 @@
                 <?php if ($_SESSION['rol'] === "admin") : ?>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="#testmonial">Actualizar</a>
+                        <a class="nav-link" href="actualizar.php">Actualizar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#testmonial">Reportes</a>
+                        <a class="nav-link" href="reportes.php">Reportes</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="perfil.php"><?php echo htmlspecialchars($_SESSION['nombre']); ?></a>
@@ -120,13 +120,13 @@
                 <?php if ($_SESSION['rol'] === "vendedor") : ?>
                    
                     <li class="nav-item">
-                        <a class="nav-link" href="#testmonial">Actualizar</a>
+                        <a class="nav-link" href="actualizar.php">Actualizar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#testmonial">Reportes</a>
+                        <a class="nav-link" href="reportes.php">Reportes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#testmonial">Venta</a>
+                        <a class="nav-link" href="compra.php">Venta</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="perfil.php"><?php echo htmlspecialchars($_SESSION['nombre']); ?></a>
@@ -364,3 +364,5 @@
 
 </body>
 </html>
+
+

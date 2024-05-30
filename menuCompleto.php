@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
+<?php
+    session_start();
+    $correo = isset($_SESSION['correo']) ? $_SESSION['correo'] : "";
+    $nombre = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : "";
+    $rol = isset($_SESSION['rol']) ? $_SESSION['rol'] : ""; // Aquí se almacena el rol del usuario
+?>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -71,10 +77,10 @@
                 <?php if ($_SESSION['rol'] === "admin") : ?>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="#testmonial">Actualizar</a>
+                        <a class="nav-link" href="actualizar.php">Actualizar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#testmonial">Reportes</a>
+                        <a class="nav-link" href="reportes.php">Reportes</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="perfil.php"><?php echo htmlspecialchars($_SESSION['nombre']); ?></a>
@@ -86,10 +92,10 @@
                 <?php if ($_SESSION['rol'] === "vendedor") : ?>
                    
                     <li class="nav-item">
-                        <a class="nav-link" href="#testmonial">Actualizar</a>
+                        <a class="nav-link" href="actualizar.php">Actualizar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#testmonial">Reportes</a>
+                        <a class="nav-link" href="reportes.php">Reportes</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="compra.php">Venta</a>

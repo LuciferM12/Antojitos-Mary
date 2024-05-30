@@ -33,10 +33,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="index.php">Inicio</a>
+                    <a class="nav-link" href="#home">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="index.php">Nosotros</a>
+                    <a class="nav-link" href="#about">Nosotros</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="menuCompleto.php">Menú</a>
@@ -52,13 +52,13 @@
             <ul class="navbar-nav">
                 <?php if (!isset($_SESSION['rol']) || $_SESSION['rol'] == "") : ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php">Blog<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="#blog">Blog<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php">Reseñas</a>
+                        <a class="nav-link" href="#testmonial">Reseñas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php">Contáctanos</a>
+                        <a class="nav-link" href="#contact">Contáctanos</a>
                     </li>
                     <li class="nav-item">
                         <a href="login.php" class="btn btn-primary ml-xl-4">Inicia Sesión</a>
@@ -75,10 +75,10 @@
                 <?php if ($_SESSION['rol'] === "admin") : ?>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="#testmonial">Actualizar</a>
+                        <a class="nav-link" href="actualizar.php">Actualizar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#testmonial">Reportes</a>
+                        <a class="nav-link" href="reportes.php">Reportes</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="perfil.php"><?php echo htmlspecialchars($_SESSION['nombre']); ?></a>
@@ -90,13 +90,13 @@
                 <?php if ($_SESSION['rol'] === "vendedor") : ?>
                    
                     <li class="nav-item">
-                        <a class="nav-link" href="#testmonial">Actualizar</a>
+                        <a class="nav-link" href="actualizar.php">Actualizar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#testmonial">Reportes</a>
+                        <a class="nav-link" href="reportes.php">Reportes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#testmonial">Venta</a>
+                       <a class="nav-link" href="compra.php">Venta</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="perfil.php"><?php echo htmlspecialchars($_SESSION['nombre']); ?></a>
@@ -113,7 +113,7 @@
         <div class="overlay text-white text-center">
             <h1 class="display-2 font-weight-bold my-3">Antojitos Mary</h1>
             <h2 class="display-4 mb-5">Hogar &amp; Amor</h2>
-            <a class="btn btn-lg btn-primary" href="#gallary">Menú Diario</a>
+            <a class="btn btn-lg btn-primary" href="#blog">Menú Diario</a>
         </div>
     </header>
 
@@ -181,7 +181,7 @@
                                 <div class="card border my-3 my-md-0">
                                     <img src="<?php echo $foto; ?>" alt="<?php echo $nombre; ?>" class="rounded-0 card-img-top mg-responsive">
                                     <div class="card-body">
-                                        <h1 class="text-center mb-4"><a class="badge">$<?php echo $costo; ?></a></h1>
+                                        <h1 class="text-center mb-4"><a href="#" class="badge">$<?php echo $costo; ?></a></h1>
                                         <h4 class="pt20 pb20"><?php echo $nombre; ?></h4>
                                         <p class="text-black"><?php echo $descripcion; ?></p>
                                     </div>
@@ -227,7 +227,7 @@
                                 <div class="card border my-3 my-md-0">
                                     <img src="<?php echo $foto; ?>" alt="<?php echo $nombre; ?>" class="rounded-0 card-img-top mg-responsive">
                                     <div class="card-body">
-                                        <h1 class="text-center mb-4"><a class="badge">$<?php echo $costo; ?></a></h1>
+                                        <h1 class="text-center mb-4"><a href="#" class="badge">$<?php echo $costo; ?></a></h1>
                                         <h4 class="pt20 pb20"><?php echo $nombre; ?></h4>
                                         <p class="text-black"><?php echo $descripcion; ?></p>
                                     </div>

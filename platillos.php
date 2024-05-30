@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -16,7 +15,7 @@
         <meta name="author" content="Sebastián Rodríguez y Martín Omar Rojas">
         <script src="https://kit.fontawesome.com/4ffe7a9329.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">   
-        <title>Reservas | Antojitos Mary</title>
+        <title>Platillos | Antojitos Mary</title>
     
         <!-- font icons -->
         <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
@@ -26,6 +25,15 @@
         <!-- Bootstrap + FoodHut main styles -->
         <script src="assets/js/calendario.js" defer></script>
         <link rel="stylesheet" href="assets/css/estilosR.css">
+        <style>
+            .contenedor-informacion{
+                margin-top: 120px;
+                background: #F2CA99;
+                width: 100%;
+                height: 700px;
+                padding: 50px;
+            }
+        </style>
     </head>
     <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
         
@@ -80,10 +88,10 @@
                 <?php if ($_SESSION['rol'] === "admin") : ?>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="#testmonial">Actualizar</a>
+                        <a class="nav-link" href="actualizar.php">Actualizar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#testmonial">Reportes</a>
+                        <a class="nav-link" href="reportes.php">Reportes</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="perfil.php"><?php echo htmlspecialchars($_SESSION['nombre']); ?></a>
@@ -95,13 +103,13 @@
                 <?php if ($_SESSION['rol'] === "vendedor") : ?>
                    
                     <li class="nav-item">
-                        <a class="nav-link" href="#testmonial">Actualizar</a>
+                        <a class="nav-link" href="actualizar.php">Actualizar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#testmonial">Reportes</a>
+                        <a class="nav-link" href="reportes.php">Reportes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#testmonial">Venta</a>
+                        <a class="nav-link" href="compra.php">Venta</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="perfil.php"><?php echo htmlspecialchars($_SESSION['nombre']); ?></a>
@@ -113,127 +121,237 @@
             </ul>
         </div>
     </nav>
-        <div class="contenedor-informacion">
-            
-
-
-           
+    <div class="contenedor-informacion">
+        <div class="segundaParte">
             <div class="segundaParte">
-                <div class="botones">
-                            <button class="boton" onclick="window.location.href='reservar2.php'">Administrar citas</button>
-                </div>
-                <div class="segundaParte">
+            <div class="texto-tit">
+                <h1 align="center">Platillos</h1>
+            </div>
+            <div class="botones">
+                <button class="boton" onclick="mostrarFormulario('alta')">Altas</button>
+                <button class="boton" onclick="mostrarFormulario('modificar')">Modificaciones</button>
+                <button class="boton" onclick="mostrarFormulario('anadir')">Añadir menú diario</button>
+                <button class="boton" onclick="mostrarFormulario('quitar')">Quitar menú diario</button>
+            </div>
+            <div id="formulario-alta" style="display: none;">
+                <form method="post" action="assets/script/agregarProducto.php">
+                    <div class="texto-tit" id="disabledtext">
+                        Agregar platillo
+                    </div>
+                    <label>Platillo o producto</label>
+                    <input class="form-control" type="text" required name="txtPlatillo" placeholder="Platillo o producto">
+                    <label>Descripcion</label>
+                    <input class="form-control" type="text" required name="txtDescripcion" placeholder="Descripcion">
+                    <label>Precio</label>
+                    <input class="form-control" type="number" required name="precio" placeholder="Precio">
+                    <label>Categoria</label>
+                    <select class="form-control" name="categoria" required>
+                        <option value="">Seleccione una categoria</option>
+                        <option value="Carnes">Carnes</option>
+                        <option value="Postres">Postres</option>
+                        <option value="Ensaladas">Ensaladas</option>
+                        <option value="Bebidas">Bebidas</option>
+                    </select>
+                    <label>Imagen</label>
+                    <input class="form-control" type="file" required name="foto" placeholder="Suba una imagen" enctype="multipart/form-data">
                     <div class="botones">
-                        <button class="boton" onclick="mostrarFormulario('alta')">Alta de Citas</button>
-                        <button class="boton" onclick="mostrarFormulario('modificar')">Modificar Citas</button>
+                        <button class="boton" type="submit">Enviar</button>
                     </div>
+                </form>
+            </div>
 
-                    <div id="formulario-alta" style="display: none;">
-                        <form method="post" action="assets/script/agregarProducto.php">
-                            <div class="texto-tit" id="disabledtext">
-                                Agregar platillo
-                            </div>
-                            <label>Platillo o producto</label>
-                            <input class="form-control" type="text" required name="txtPlatillo" placeholder="Platillo o producto">
-                            <label>Descripcion</label>
-                            <input class="form-control" type="text" required name="txtDescripcion" placeholder="Descripcion">
-                            <label>Precio</label>
-                            <input class="form-control" type="number" required name="precio" placeholder="Precio">
-                            <label>Categoria</label>
-                            <select class="form-control" name="categoria" required>
-                                <option value="">Seleccione una categoria</option>
-                                <option value="Carnes">Carnes</option>
-                                <option value="Postres">Postres</option>
-                                <option value="Ensaladas">Ensaladas</option>
-                                <option value="Bebidas">Bebidas</option>
-                            </select>
-                            <label>Imagen</label>
-                            <input class="form-control" type="file" required name="foto" placeholder="Suba una imagen">
-                            <div class="botones">
-                                <button class="boton" type="submit">Enviar</button>
-                            </div>
-                        </form>
+            <div id="formulario-modificar" style="display: none;">
+                <form method="post" action="assets/script/modificarProducto.php">
+                    <div class="texto-tit" id="disabledtext">
+                        Modificar
                     </div>
-
-                    <div id="formulario-modificar" style="display: none;">
-                        <form method="post" action="assets/script/modificarCita.php">
-                        <div class="texto-tit" id="disabledtext">
-                            Modificar
-                        </div>
-                        <label>Seleccione producto a modificar</label>
-                        <select class="form-control" name="modifPlatillo" required>
-                                <option value="">Seleccione un platillo</option>
+                    <label>Seleccione producto a modificar</label>
+                    <select class="form-control" name="modifPlatillo" required>
+                            <?php
+                                
+                                $conn = new mysqli("localhost","u222406285_Omar12", "IguanoPHPDev22", "u222406285__BD_IngSoft");
+                            
+                                // Verificar la conexión
+                                if ($conn->connect_error) {
+                                    die("Error de conexión: " . $conn->connect_error);
+                                }
+                            
+                                // Consulta SQL para obtener todos los productos
+                                $sql = "SELECT idProducto, nombre FROM Producto";
+                                $resultado = $conn->query($sql);
+                            
+                                // Generar las opciones del select
+                                while ($fila = $resultado->fetch_assoc()) {
+                                    echo '<option value="' . $fila['idProducto'] . '">' . $fila['nombre'] . '</option>';
+                                }
+                            
+                                // Cerrar la conexión
+                                $conn->close();
+                            ?>
+                    </select>
+                    <label>Platillo o producto</label>
+                        <input class="form-control" type="text"  name="txtPlatillo" placeholder="Platillo o producto">
+                        <label>Descripcion</label>
+                        <input class="form-control" type="text"  name="txtDescripcion" placeholder="Descripcion">
+                        <label>Precio</label>
+                        <input class="form-control" type="number"  name="precio" placeholder="Precio">
+                        <label>Categoria</label>
+                        <select class="form-control" name="categoria" >
+                            <option value="">Seleccione una categoria</option>
+                            <option value="Carnes">Carnes</option>
+                            <option value="Postres">Postres</option>
+                            <option value="Ensaladas">Ensaladas</option>
+                            <option value="Bebidas">Bebidas</option>
                         </select>
-                        <label>Platillo o producto</label>
-                            <input class="form-control" type="text" required name="txtPlatillo" placeholder="Platillo o producto">
-                            <label>Descripcion</label>
-                            <input class="form-control" type="text" required name="txtDescripcion" placeholder="Descripcion">
-                            <label>Precio</label>
-                            <input class="form-control" type="number" required name="precio" placeholder="Precio">
-                            <label>Categoria</label>
-                            <select class="form-control" name="categoria" required>
-                                <option value="">Seleccione una categoria</option>
-                                <option value="Carnes">Carnes</option>
-                                <option value="Postres">Postres</option>
-                                <option value="Ensaladas">Ensaladas</option>
-                                <option value="Bebidas">Bebidas</option>
-                            </select>
-                        <input class="form-control" id="disabledInput" type="date" required name="date">
+                    <div class="botones">
+                            <button class="boton" type="submit">Enviar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="formulario-Amenu" style="display: none;">
+                    <form method="post" action="assets/script/agregarMenu.php">
+                    <div class="texto-tit" id="disabledtext">
+                        Agregar a Menú Diario
+                    </div>
+                    <label>Seleccione producto a agregar</label>
+                    <select class="form-control" name="modifUsuario" required>
+                        <option value="">Seleccione un producto</option>
+                            <?php
+                                
+                                $conn = new mysqli("localhost","u222406285_Omar12", "IguanoPHPDev22", "u222406285__BD_IngSoft");
+                            
+                                // Verificar la conexión
+                                if ($conn->connect_error) {
+                                    die("Error de conexión: " . $conn->connect_error);
+                                }
+                            
+                                // Consulta SQL para obtener todos los productos
+                                $sql = "SELECT Producto.idProducto, Producto.nombre
+                                FROM Producto
+                                LEFT JOIN MenuDiario ON Producto.idProducto = MenuDiario.idProducto
+                                WHERE MenuDiario.idProducto IS NULL
+                                ";
+                                $resultado = $conn->query($sql);
+                            
+                                // Generar las opciones del select
+                                while ($fila = $resultado->fetch_assoc()) {
+                                    echo '<option value="' . $fila['idProducto'] . '">' . $fila['nombre'] . '</option>';
+                                }
+                            
+                                // Cerrar la conexión
+                                $conn->close();
+                            ?>
+                    </select>
+                    <div class="botones">
+                            <button class="boton" type="submit">Enviar</button>
+                        </div>
+                    </form>
+            </div>
+            <div id="formulario-Bmenu" style="display: none;">
+                    <form method="post" action="assets/script/quitarMenu.php">
+                        <div class="texto-tit" id="disabledtext">
+                            Bajas
+                        </div>
+                        <label>Seleccione producto a quitar del menu diario</label>
+                        <select class="form-control" name="modifUsuario" required>
+                            <option value="">Seleccione un producto</option>
+                                <?php
+                                    
+                                    $conn = new mysqli("localhost","u222406285_Omar12", "IguanoPHPDev22", "u222406285__BD_IngSoft");
+                                
+                                    // Verificar la conexión
+                                    if ($conn->connect_error) {
+                                        die("Error de conexión: " . $conn->connect_error);
+                                    }
+                                
+                                    // Consulta SQL para obtener todos los productos
+                                    $sql = "SELECT Producto.idProducto, Producto.nombre
+                                    FROM Producto
+                                    LEFT JOIN MenuDiario ON Producto.idProducto = MenuDiario.idProducto
+                                    WHERE MenuDiario.idProducto = Producto.idProducto
+                                    ";
+                                    $resultado = $conn->query($sql);
+                                
+                                    // Generar las opciones del select
+                                    while ($fila = $resultado->fetch_assoc()) {
+                                        echo '<option value="' . $fila['idProducto'] . '">' . $fila['nombre'] . '</option>';
+                                    }
+                                
+                                    // Cerrar la conexión
+                                    $conn->close();
+                                ?>
+                        </select>
                         <div class="botones">
                                 <button class="boton" type="submit">Enviar</button>
                             </div>
-                        </form>
-                </div>
+                    </form>
+            </div>
+        </div>
+    </div>
 </div>
-        
-        
-                <script>
-                    function mostrarFormulario(formulario) {
-                        var altaForm = document.getElementById('formulario-alta');
-                        var modificarForm = document.getElementById('formulario-modificar');
 
-                        if (formulario === 'alta') {
-                            altaForm.style.display = 'block';
-                            modificarForm.style.display = 'none';
-                        } else if (formulario === 'modificar') {
-                            altaForm.style.display = 'none';
-                            modificarForm.style.display = 'block';
-                        }
-                    }
-                </script>
-        <script>
-            <?php
-                if (isset($_GET["errorCode"])) {
-                    $errorCode = $_GET["errorCode"];
-    
-                    switch ($errorCode) {
-                                                
-                        case 1:
-                            echo "alert('Ya existe una cita programada para la misma hora y fecha. Por favor, elige otra hora o fecha.');";
-                            break;
-                        case 2:
-                            echo "alert('Error al verificar la disponibilidad de la cita.');";
-                            break;
-                        case 3:
-                            echo "alert('La cita ha sido agendada correctamente.');";
-                            break;
-                        case 5:
-                            echo "alert('Usuario no encontrado.');";
-                            break;
-                        case 4:
-                            echo "alert('Error al agendar la cita');";
-                            break;
-                        
-                            header("Location: reservar.php");
-                    }
-                }
-            ?>
-        </script>
+    <script>
+        function mostrarFormulario(formulario) {
+            var altaForm = document.getElementById('formulario-alta');
+            var modificarForm = document.getElementById('formulario-modificar');
+            var agregaMenu = document.getElementById('formulario-Amenu');
+            var bajaMenu = document.getElementById('formulario-Bmenu');
 
-
+            if (formulario === 'alta') {
+                altaForm.style.display = 'block';
+                modificarForm.style.display = 'none';
+                agregaMenu.style.display = 'none';
+                bajaMenu.style.display = 'none';
+            } else if (formulario === 'modificar') {
+                altaForm.style.display = 'none';
+                modificarForm.style.display = 'block';
+                agregaMenu.style.display = 'none';
+                bajaMenu.style.display = 'none';
+            }else if (formulario === 'anadir') {
+                altaForm.style.display = 'none';
+                agregaMenu.style.display = 'block';
+                modificarForm.style.display = 'none';
+                bajaMenu.style.display = 'none';
+            }else if (formulario === 'quitar') {
+                altaForm.style.display = 'none';
+                bajaMenu.style.display = 'block';
+                modificarForm.style.display = 'none';
+                agregaMenu.style.display = 'none';
+            }
             
-                
-           
+        }
+    </script>
+    <script>
+        <?php
+            if (isset($_GET["errorCode"])) {
+                $errorCode = $_GET["errorCode"];
+
+                switch ($errorCode) {
+                                            
+                    case 1:
+                        echo "alert('Registro exitoso');";
+                        header("Location: platillos.php");
+                        break;
+                    case 2:
+                        echo "alert('Error.');";
+                        header("Location: platillos.php");
+                        break; 
+                        
+                    case 3:
+                        echo "alert('Sin datos para modificar.');";
+                        header("Location: platillos.php");
+                        break;
+                        
+                }
+            }
+        ?>
+    </script>
+
+
+        
+            
+        
             
 
         

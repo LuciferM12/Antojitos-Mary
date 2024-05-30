@@ -35,7 +35,7 @@ if (isset($_GET['confirmar']) && $_GET['confirmar'] == 'true') {
             if (confirm("¿Estás seguro de cancelar la cita?")) {
                 window.location.href = "?id=<?php echo $idCita; ?>&confirmar=true";
             } else {
-                window.location.href = "Location: ../../reservar2.php";
+                window.location.href = "https://itiuplsp.tech/Antojitos-Mary/reservar2.php";
             }
         </script>
     </head>

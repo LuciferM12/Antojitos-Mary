@@ -105,10 +105,10 @@
                 <?php if ($_SESSION['rol'] === "admin") : ?>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="#testmonial">Actualizar</a>
+                        <a class="nav-link" href="actualizar.php">Actualizar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#testmonial">Reportes</a>
+                        <a class="nav-link" href="reportes.php">Reportes</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="perfil.php"><?php echo htmlspecialchars($_SESSION['nombre']); ?></a>
@@ -120,13 +120,13 @@
                 <?php if ($_SESSION['rol'] === "vendedor") : ?>
                    
                     <li class="nav-item">
-                        <a class="nav-link" href="#testmonial">Actualizar</a>
+                        <a class="nav-link" href="actualizar.php">Actualizar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#testmonial">Reportes</a>
+                        <a class="nav-link" href="reportes.php">Reportes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#testmonial">Venta</a>
+                        <a class="nav-link" href="compra.php">Venta</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="perfil.php"><?php echo htmlspecialchars($_SESSION['nombre']); ?></a>
@@ -141,7 +141,7 @@
     <div class="contenedor-informacion">
         <div class="contenedor-imagen">
             <div class="foto">
-                <img src="assets/imgs/Carlota.jpg" alt="" class="img-perfil">
+                <img src="assets/imgs/user2.jpg" alt="" class="img-perfil">
             </div>
             
                 <div class="datos">
@@ -176,61 +176,126 @@
                 <div class="compra">
                     <div class="tabla-compras">
                         <section class="header-tabla">
-                            <h1>Historial de Compras</h1>
+                            <?php if ($_SESSION['rol'] === "admin" || $_SESSION['rol'] === "vendedor") : ?>
+                                <h1>Historial de Ventas</h1>
+                            <?php endif; ?>
+                            <?php if ($_SESSION['rol'] === "cliente"): ?>
+                                <h1>Historial de Compras</h1>
+                            <?php endif; ?>
                         </section>
                         <section class="body-table">
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Vendedor</th>
-                                        <th>Formato</th>
-                                        <th>Fecha</th>
-                                        <th>Estatus</th>
-                                        <th>Total</th>
+                                        <?php if ($_SESSION['rol'] === "cliente") : ?>
+                                            <th>ID</th>
+                                            <th>Vendedor</th>
+                                            <th>Fecha</th>
+                                            <th>Estatus</th>
+                                            <th>Total</th>
+                                        <?php endif; ?>
+                                        <?php if ($_SESSION['rol'] === "vendedor") : ?>
+                                            <th>ID</th>
+                                            <th>Usuario</th>
+                                            <th>Fecha</th>
+                                            <th>Estatus</th>
+                                            <th>Total</th>
+                                        <?php endif; ?>
+                                        <?php if ($_SESSION['rol'] === "admin") : ?>
+                                            <th>ID</th>
+                                            <th>Vendedor</th>
+                                            <th>Cliente</th>
+                                            <th>Fecha</th>
+                                            <th>Estatus</th>
+                                            <th>Total</th>
+                                        <?php endif; ?>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Genaro Niño</td>
-                                        <td>En tienda</td>
-                                        <td>24 Nov, 2023</td>
-                                        <td>
-                                            <p class="estatus entregada">Entregada</p>
-                                        </td>
-                                        <td><strong>$128.00</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Roxana Herrera</td>
-                                        <td>En tienda</td>
-                                        <td>24 Nov, 2023</td>
-                                        <td>
-                                            <p class="estatus cancelada">Cancelada</p>
-                                        </td>
-                                        <td><strong>$128.00</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Omar Montaño</td>
-                                        <td>En tienda</td>
-                                        <td>24 Nov, 2023</td>
-                                        <td>
-                                            <p class="estatus proceso">Curso</p>
-                                        </td>
-                                        <td><strong>$128.00</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Francisco Ordaz</td>
-                                        <td>En tienda</td>
-                                        <td>24 Nov, 2023</td>
-                                        <td>
-                                            <p class="estatus entregada">Entregada</p>
-                                        </td>
-                                        <td><strong>$128.00</strong></td>
-                                    </tr>
+                                    <?php
+                                        $conn = new mysqli("localhost", "u222406285_Omar12", "IguanoPHPDev22", "u222406285__BD_IngSoft");
+
+                                        // Verifica la conexión
+                                        if ($conn->connect_error) {
+                                            die("Error de conexión: " . $conn->connect_error);
+                                        }
+                                        $rol_usuario = $_SESSION['rol']; // Asumimos que el rol del usuario está almacenado en la sesión
+                                        $nombre_usuario = $_SESSION['nombre'];
+
+                                        // Verificar si el usuario tiene el rol de "vendedor" o "admin"
+                                        if ($rol_usuario === 'vendedor'){
+                                            $sql = "SELECT Compra.idCompra, Compra.idUsuario, Compra.idVendedor, Compra.costoTotal, Compra.fecha, Usuario.correo AS correo_usuario
+                                            FROM Compra
+                                            INNER JOIN Usuario AS Usuario ON Compra.idUsuario = Usuario.idUsuario WHERE Compra.idVendedor = $idUsuario";
+                                        }else 
+                                        {
+                                            if ($rol_usuario === 'admin'){
+                                                $sql = "SELECT Compra.idCompra, Compra.idUsuario, Compra.idVendedor, Compra.costoTotal, Compra.fecha, 
+                                                Usuario.correo AS correo_usuario, Vendedor.correo AS correo_vendedor
+                                                FROM Compra
+                                                INNER JOIN Usuario ON Compra.idUsuario = Usuario.idUsuario
+                                                INNER JOIN Usuario AS Vendedor ON Compra.idVendedor = Vendedor.idUsuario";
+                                            }else 
+                                            {
+                                                if ($rol_usuario === 'cliente'){
+                                                    $sql = "SELECT Compra.idCompra, Compra.idUsuario, Compra.idVendedor, Compra.costoTotal, Compra.fecha, Usuario.correo AS correo_vendedor
+                                                FROM Compra
+                                                INNER JOIN Usuario AS Usuario ON Compra.idVendedor = Usuario.idUsuario
+                                                WHERE Compra.idUsuario = (SELECT idUsuario FROM Usuario WHERE nombre = '$nombre_usuario')";
+                                                }
+                                            }
+                                        }
+
+                                        $resultado = $conn->query($sql);
+                                        if ($resultado->num_rows > 0) 
+                                        {
+                                            if ($rol_usuario === 'vendedor') 
+                                            {
+                                                while ($fila = $resultado->fetch_assoc()) {
+                                                    echo '<tr>
+                                                            <td>' . $fila["idCompra"] . '</td>
+                        
+                                                            <td>' . $fila["correo_usuario"] . '</td>
+                                                            <td>' . $fila["fecha"] . '</td>
+                                                            <td><p class="estatus entregada">Pagada</p></td>
+                                                            <td><strong>$' . $fila["costoTotal"] . '.00</strong></td>
+                                                        </tr>';
+                                                }
+                                            }
+                                            else{
+                                                if ($rol_usuario === 'admin') 
+                                                {
+                                                    while ($fila = $resultado->fetch_assoc()) {
+                                                        echo '<tr>
+                                                                <td>' . $fila["idCompra"] . '</td>
+                                                                <td>' . $fila["correo_vendedor"] . '</td>
+                                                                <td>' . $fila["correo_usuario"] . '</td>
+                                                                <td>' . $fila["fecha"] . '</td>
+                                                                <td><p class="estatus entregada">Pagada</p></td>
+                                                                <td><strong>$' . $fila["costoTotal"] . '.00</strong></td>
+                                                            </tr>';
+                                                    }
+                                                }
+                                                else{
+                                                    if ($rol_usuario === 'cliente') 
+                                                    {
+                                                        while ($fila = $resultado->fetch_assoc()) {
+                                                            echo '<tr>
+                                                                    <td>' . $fila["idCompra"] . '</td>
+                                                                    <td>' . $fila["correo_vendedor"] . '</td>
+                                                                    <td>' . $fila["fecha"] . '</td>
+                                                                    <td><p class="estatus entregada">Pagada</p></td>
+                                                                    <td><strong>$' . $fila["costoTotal"] . '.00</strong></td>
+                                                                </tr>';
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        } 
+
+                                        $conn->close();
+                                        ?>
                                 </tbody>
                             </table>
                         </section>

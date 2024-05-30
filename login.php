@@ -16,8 +16,8 @@
             <form action="assets/script/login.php" method="post" class="inicioSesion">
                 <h2 class="titulo">Inicio de Sesión</h2>
                 <div class="entrada">
-                    <i class="fa fa-user-circle" aria-hidden="true"></i>
-                    <input type="text" name="txtUser" placeholder="Username" required>
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                    <input type="text" name="txtUser" placeholder="Correo" required>
                 </div>
                 <div class="entrada">
                     <i class="fas fa-lock"></i>

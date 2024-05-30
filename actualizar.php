@@ -15,7 +15,7 @@
         <meta name="author" content="Sebastián Rodríguez y Martín Omar Rojas">
         <script src="https://kit.fontawesome.com/4ffe7a9329.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">   
-        <title>Reservas | Antojitos Mary</title>
+        <title>Actualizar | Antojitos Mary</title>
     
         <!-- font icons -->
         <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
@@ -25,10 +25,20 @@
         <!-- Bootstrap + FoodHut main styles -->
         <script src="assets/js/calendario.js" defer></script>
         <link rel="stylesheet" href="assets/css/estilosR.css">
+        <style>
+            .contenedor-informacion{
+                margin-top: 120px;
+                background: #F2CA99;
+                width: 100%;
+                height: 700px;
+                padding: 50px;
+            }
+        </style>
     </head>
     <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
         
         <!-- Navbar -->
+         <!-- Navbar -->
     <nav class="custom-navbar navbar navbar-expand-lg navbar-dark fixed-top" data-spy="affix" data-offset-top="10">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -93,13 +103,13 @@
                 <?php if ($_SESSION['rol'] === "vendedor") : ?>
                    
                     <li class="nav-item">
-                        <a class="nav-link" href="actualizar.php">Actualizar</a>
+                        <a class="nav-link" href="#testmonial">Actualizar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="reportes.php">Reportes</a>
+                        <a class="nav-link" href="#testmonial">Reportes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="compra.php">Venta</a>
+                        <a class="nav-link" href="#testmonial">Venta</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="perfil.php"><?php echo htmlspecialchars($_SESSION['nombre']); ?></a>
@@ -111,106 +121,30 @@
             </ul>
         </div>
     </nav>
-        <div class="contenedor-informacion">
-            <div class="texto-tit">
-                <h1>Administrar citas</h1>
+    <div class="contenedor-informacion">
+        <div class="segundaParte">
+        <div class="texto-tit">
+                <h1 align="center">Actualizar</h1>
             </div>
             <div class="segundaParte">
-                <?php
-                    // Conexión a la base de datos
-                    $conn = new mysqli("localhost", "u222406285_Omar12", "IguanoPHPDev22", "u222406285__BD_IngSoft");
+                <div class="botones">
+                    <button class="boton" onclick="window.location.href='usuarios.php'">Usuarios</button>
+                    <button class="boton" onclick="window.location.href='platillos.php'">Platillos</button>
+                </div>
+                
 
-                    // Verifica la conexión
-                    if ($conn->connect_error) {
-                        die("Error de conexión: " . $conn->connect_error);
-                    }
-
-                    // Consulta SQL para obtener las citas
-                    $rol_usuario = $_SESSION['rol']; // Asumimos que el rol del usuario está almacenado en la sesión
-                    $nombre_usuario = $_SESSION['nombre'];
-
-                    // Verificar si el usuario tiene el rol de "vendedor" o "admin"
-                    if ($rol_usuario === 'vendedor' || $rol_usuario === 'admin') {
-                        // Obtener todas las citas del día actual si el usuario es vendedor o admin
-                        $sql = "SELECT Cita.idCita, Cita.fecha, Cita.hora, Cita.status, Usuario.nombre
-                                FROM Cita
-                                JOIN Usuario ON Cita.usuario = Usuario.idUsuario
-                               ";
-                    } else {
-                        // Obtener las citas del usuario actual si no es vendedor ni admin
-                        $nombre_usuario = $_SESSION['nombre']; // Asumimos que el nombre del usuario está almacenado en la sesión
-                        $sql = "SELECT Cita.idCita, Cita.fecha, Cita.hora, Cita.status, Usuario.nombre
-                        FROM Usuario
-                        JOIN Cita ON Usuario.idUsuario = Cita.usuario
-                        WHERE Usuario.nombre = '$nombre_usuario' AND Cita.status = 'Activa'";
-                    }
-
-                    $resultado = $conn->query($sql);
-
-                    // Mostrar las citas en la tabla
-                    if ($resultado->num_rows > 0) {
-                        echo '<table class="table" style="color:black;">';
-                        echo '<thead>
-                                <tr>
-                                    <th scope="col">Fecha</th>
-                                    <th scope="col">Hora</th>
-                                    <th scope="col">Nombre</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">&nbsp;</th>
-                                </tr>
-                            </thead>
-                            <tbody>';
-
-                        while ($fila = $resultado->fetch_assoc()) {
-                            echo '<tr>
-                                    <td>' . $fila["fecha"] . '</td>
-                                    <td>' . $fila["hora"] . '</td>
-                                    <td>' . $fila["nombre"] . '</td>
-                                    <td>' . $fila["status"] . '</td>
-                                    <td><a style="color:red; font-weight: bold;" href="assets/script/cancelar_Cita.php?id=' . $fila["idCita"] . '">Cancelar</a></td>
-                                </tr>';
-                        }
-
-                        echo '</tbody>
-                            </table>';
-                    } else {
-                        echo "No se encontraron citas.";
-                    }
-
-                    $conn->close();
-                    ?>
-                 
-                    <div class="botones">
-                                <button class="boton" onclick="window.location.href='reservar.php'">Volver</button>
-                    </div>
-
-                    
-
+                
             </div>
-
-                
-        
-            <script>
-                <?php
-                    if (isset($_GET["errorCode"])) {
-                        $errorCode = $_GET["errorCode"];
-        
-                        switch ($errorCode) {      
-                            case 1:
-                                echo "alert('Cita correctamente eliminada.');";
-                                break;
-                            case 2:
-                                echo "alert('Error al cancelar cita.');";
-                                break;
-                            }
-                        }
-                ?>
-            </script>
         </div>
+    </div>
 
+   
+    
+
+
+        
             
-                
-           
+        
             
 
         
@@ -250,4 +184,3 @@
         
     </body>
 </html>
-

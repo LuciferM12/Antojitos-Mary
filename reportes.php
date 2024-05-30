@@ -26,15 +26,6 @@
         <!-- Bootstrap + FoodHut main styles -->
         <script src="assets/js/calendario.js" defer></script>
         <link rel="stylesheet" href="assets/css/estilosR.css">
-        <style>
-            .contenedor-informacion{
-                margin-top: 120px;
-                background: #F2CA99;
-                width: 100%;
-                height: 1200px;
-                padding: 50px;
-            }
-        </style>
     </head>
     <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
         
@@ -110,7 +101,7 @@
                             <a class="nav-link" href="reportes.php">Reportes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="compra.php">Venta</a>
+                            <a class="nav-link" href="compras.php">Venta</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="perfil.php"><?php echo htmlspecialchars($_SESSION['nombre']); ?></a>
@@ -123,109 +114,14 @@
             </div>
         </nav>
         <div class="contenedor-informacion">
-            <div class="texto-tit">
-                Seleccione una fecha para su reservación dando click en el dia deseado:
+            <h2 class="mb-4">Nuestra Historia</h2>
+            <div class="reportes">
+                <button class="boton" onclick="window.location.href='comprasReporte.php'" style="width: 300px; height: 150px;">Compras</button>
+                <button class="boton" onclick="usuariosReporte.php" style="width: 300px; height: 150px;">Usuarios</button>
+                <button class="boton" onclick="reservacionesReporte.php" style="width: 300px; height: 150px;">Reservaciones</button>
+                <button class="boton" onclick="activasReportes.php" style="width: 300px; height: 150px;">Reservaciones Activas</button>
             </div>
-            <div class="parte-calendario">
-                <div class="wrapper">
-                    <header>
-                        <div class="fecha-actual">Mayo 2024</div>
-                        <div class="iconos">
-                            <span id="prev" class="material-symbols-rounded">chevron_left</span>
-                            <span id="next" class="material-symbols-rounded">chevron_right</span>
-                        </div>
-                    </header>
-                    <div class="calendario">
-                        <ul class="semanas">
-                            <li>Dom</li>
-                            <li>Lun</li>
-                            <li>Mar</li>
-                            <li>Mie</li>
-                            <li>Jue</li>
-                            <li>Vie</li>
-                            <li>Sab</li>
-                        </ul>
-                        <ul class="dias">
-                            
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="segundaParte">
-                <form method="post" action="assets/script/registrarCita.php">
-                    
-                    <?php if ($_SESSION['rol'] === "vendedor") : ?>
-                    <div class="texto-tit">
-                            Seleccione un usuario:
-                    </div>
-                        <select class="form-control" name="txtUsuario" required>
-                            <option value="">Seleccione un Usuario</option>
-                            <?php
-                                $conn = new mysqli("localhost","u222406285_Omar12", "IguanoPHPDev22", "u222406285__BD_IngSoft");
-
-                                if ($conn->connect_error) {
-                                    die("Conexión fallida: " . $conn->connect_error);
-                                }
-
-                                $sql = "SELECT correo, nombre FROM Usuario WHERE rol = 'cliente'";
-                                $result = $conn->query($sql);
-                                $options = "";
-
-                                if ($result->num_rows > 0) {
-                                    while($row = $result->fetch_assoc()) {
-                                        $options .= '<option value="' . $row["nombre"] . '">' . $row["correo"] . '</option>';
-                                    }
-                                } else {
-                                    $options .= '<option value="">No hay usuarios</option>';
-                                }
-
-                                $conn->close();
-                                echo $options;
-                            ?>
-				        </select>
-                <?php endif; ?>
-
-                    <div class="form-group">
-                        <div class="texto-tit" id="disabledtext">
-                            Dia seleccionado:
-                        </div>
-                        <input class="form-control" id="disabledInput" type="date" required name="date">
-                    </div>
-                    <div class="texto-tit">
-                        Seleccione una hora para su reservación:
-                    </div>
-                    <div class="form-group">
-                        <select class="form-control" id="exampleFormControlSelect1" name="hora" required>
-                                <option value="">Seleccione una hora disponible</option>
-                                <option value="14:00:00">14:00:00</option>
-                                <option value="14:30:00">14:30:00</option>
-                                <option value="15:00:00">15:00:00</option>
-                                <option value="15:30:00">15:30:00</option>
-                                <option value="16:00:00">16:00:00</option>
-                                <option value="16:30:00">16:30:00</option>
-                                <option value="17:00:00">17:00:00</option>
-                                <option value="17:30:00">17:30:00</option>
-                                <option value="18:00:00">18:00:00</option>
-                                <option value="18:30:00">18:30:00</option>
-                                <option value="19:00:00">19:00:00</option>
-                                <option value="19:30:00">19:30:00</option>
-                        </select>
-                    </div>
-                    <div class="botones">
-                        <button class="boton" type="submit">Reservar</button>
-                        <button class="boton" onclick="window.location.href='index.php'">Cancelar</button>
-                    </div>
-                </form>
-                
-            </div>
-            <div class="segundaParte">
-                <div class="botones">
-                            <button class="boton" onclick="window.location.href='reservar2.php'">Administrar citas</button>
-                </div>
-            </div>
-            <script>
+        <script>
                 <?php
                     if (isset($_GET["errorCode"])) {
                         $errorCode = $_GET["errorCode"];
