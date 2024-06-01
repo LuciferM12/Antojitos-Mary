@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <?php
+
     session_start();
     $correo = isset($_SESSION['correo']) ? $_SESSION['correo'] : "";
     $nombre = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : "";
