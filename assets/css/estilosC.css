@@ -26,155 +26,148 @@ body {
   background-color: #343a40;
   min-height: 100vh;
 }
-/*PERFIL ESTILOS*/
+/*Compra ESTILOS*/
+.contenedor-informacion{
+    display: flex;
+    width: 100%;
+    height: 1400px;
+    margin-top: 120px;
+    background: #F2CA99;
+    flex-direction: column;
+  }
+  
+  .altaCompra{
+    width: 100%;
+    padding: 20px;
+  }
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
 
-.boton{
-    width: 200px;
-    height: 50px;
+  .contenedor-info{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .boton{
+    width: 150px;
+    height: 35px;
     border: none;
-    border-radius: 50px;
-    background: #0D0D0D;
+    border-radius: 35px;
+    background: #00010D;
     color: #fff;
     font-weight: 600;
     margin: 10px 0;
-    font-size: 20px;
-    margin-left: 20px;
+    font-size: 15px;
 }
 
-.contenedor-informacion{
-  margin-top: 120px;
-  background: #F2CA99;
+.historial{
+  background-repeat: no-repeat;
+  height: 95%;
+  width: 90%;
+  margin: 2%;
+  border-radius: 2%;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+table, th, td{
+  padding: 1rem;
+  border-collapse:collapse;
+  text-align:left;
+}
+
+thead th{
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: #d5d1defe;
+}
+
+tbody tr:nth-child(even){
+  background-color: #0000000b;
+}
+
+tbody tr:hover{
+  background-color: #fff6;
+}
+
+.estatus{
+  background-color: red;
+  padding: .4rem 0;
+  border-radius: 2rem;
+  text-align: center;
+}
+
+.estatus.entregada{
+  background-color: #86e49d;
+  color: #006b21;
+
+}
+
+.estatus.cancelada{
+  background-color: #d893a3;
+  color: #b30021;
+
+}
+
+.estatus.proceso{
+  background-color: #ebc474;
+}
+
+.tabla-compras
+{
+  width:100%;
+  height: 700px;
+  background-color: #fff5;
+  backdrop-filter: blur(7px);
+  box-shadow: 0 .4rem .8rem #0005;
+  border-radius: .8rem;
+  overflow: hidden;
+}
+
+.header-tabla
+{
   width: 100%;
-  height: 1000px;
-  padding: 50px;
+  height: 10%;
+  background-color: #fff4;
+  padding: .8rem 1rem;
 }
 
-.contenedor-reportes{
-  margin-top: 120px;
-  background: #F2CA99;
+.header-tabla h1{
+  font-size: 35px;
+  font-weight: 600;
+}
+
+.body-table{
+  width: 95%;
+  max-height: cal(89% - .8rem);
+  background-color: #fffb;
+  margin: .8rem auto;
+  border-radius: .6rem;
+  overflow: auto;
+}
+
+.body-table::-webkit-scrollbar{
+  width: 0.5rem;
+  height: 0.5rem;
+
+}
+
+.body-table::-webkit-scrollbar-thumb{
+  border-radius: .5rem;
+  background-color: #0004;
+  visibility: hidden;
+}
+
+.body-table:hover::-webkit-scrollbar-thumb{
+  visibility: visible;
+}
+  
+table{
   width: 100%;
-  height: 1000px;
-  padding: 50px;
-}
-
-.texto-tit{
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-
-.parte-calendario{
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    margin-top: 50px;
-    height: 500px;
-    min-height: 500px;
-}
-
-.wrapper{
-    width: 450px;
-    background: #fff;
-    border-radius: 10px;
-}
-
-.wrapper header{
-    display: flex;
-    align-items: center;
-    padding: 25px 30px 10px;
-    justify-content: space-between;
-}
-
-header .fecha-actual{
-    font-size: 1.45rem;
-    font-weight: 600; 
-}
-
-header .iconos span{
-    height: 38px;
-    width: 38px;
-    text-align: center;
-    color: #878787;
-    font-size: 1.9rem;
-    margin: 0 1px;
-    cursor: pointer;
-    line-height: 38px;
-    border-radius: 50%;
-}
-
-header .iconos span:hover{
-    background: #f2f2f2;
-}
-
-header .iconos span:last-child{
-    margin-right:  -10px;
-}
-
-.calendario{
-    padding: 20px;
-}
-
-.calendario ul{
-    display: flex;
-    list-style: none;
-    flex-wrap: wrap;
-    text-align: center;
-}
-
-.calendario .dias{
-    margin-bottom: 20px;
-}
-.calendario .semanas li{
-    font-weight: 600;
-
-}
-
-.calendario ul li{
-    position: relative;
-    width: calc(100% / 7);
-}
-
-.calendario .dias li{
-    z-index: 1;
-    cursor: pointer;
-    margin-top: 30px;
-}
-
-.dias li.inactivo{
-    color: #aaa;
-}
-
-.dias li.activo{
-    color: white;
-}
-
-.calendario .dias li::before{
-    position: absolute;
-    content: " ";
-    height: 40px;
-    width: 40px;
-    top: 50%;
-    left: 50%;
-    z-index: -1;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-}
-
-
-.dias li:hover::before{
-    background: #f2f2f2;
-}
-
-.dias li.activo::before{
-    background: #0D0D0D;
 }
 
 .form-control {
@@ -194,57 +187,52 @@ header .iconos span:last-child{
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
 
+  .formulario
+  {
+    width: 100%
+  }
 
-.segundaParte{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
+  .form-control:focus {
+    color: #dee2e6;
+    background-color: #0D0D0D;
+    border-color: #23110A;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
+  }
 
-.botones{
-    display: flex;
-    display: row;
-    justify-content: center;
-    
-}
-
-.form-control:disabled, .form-control[readonly] {
-  background-color: #00010D;
-  opacity: 1;
-}
-
-#disabledInput{
-  display: none;
-}
-
-#disabledtext{
-  display: none;
-}
-
-
-@media (max-width:410px)
+@media (max-width:1024px)
 {
-    header .fecha-actual{
-        font-size: 1.1rem;
-        font-weight: 600; 
-    }
-    .form-control {
-        display: block;
-        width: 70%;
-    }
+  td:not(:first-of-type){
+    min-width: 12.1rem;
+  }
+  .contenedor-informacion{
+    height: 1500px;
+    margin-top: 120px;
+    background: #F2CA99;
+    justify-content: center;
+  }
+
+  .contenedor-imagen{
+    height: 700px;
+    margin-top: -90px;
+  }
+
+  .contenedor-info{
+    width: 90%;
+    height: 700px;
+  }
+
+  .tabla-compras
+  {
+    height: 550px;
+  }
 }
 
-
-@media (max-width:365px)
+@media (max-width:575px)
 {
-    header .fecha-actual{
-        font-size: 0.96rem;
-        font-weight: 600; 
-    }
-
-    .calendario .semanas li{
-        font-size: 10px;
-    }
+  .header-tabla h1{
+    font-size: 18px;
+  }
 }
 
 /*ESTILOS GENERALES*/
@@ -290,7 +278,19 @@ address {
   line-height: inherit;
 }
 
+ol,
+ul,
+dl {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
 
+ol ol,
+ul ul,
+ol ul,
+ul ol {
+  margin-bottom: 0;
+}
 
 dt {
   font-weight: 700;
@@ -2332,7 +2332,6 @@ pre code {
 }
 
 
-
 @media (prefers-reduced-motion: reduce) {
   .form-control {
     -webkit-transition: none;
@@ -2345,13 +2344,7 @@ pre code {
   border: 0;
 }
 
-.form-control:focus {
-  color: #dee2e6;
-  background-color: #0D0D0D;
-  border-color: #23110A;
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
-}
+
 
 .form-control::-webkit-input-placeholder {
   color: #ced4da;
@@ -2378,6 +2371,10 @@ pre code {
   opacity: 1;
 }
 
+.form-control:disabled, .form-control[readonly] {
+  background-color: #6c757d;
+  opacity: 1;
+}
 
 select.form-control:focus::-ms-value {
   color: #dee2e6;
@@ -11494,5 +11491,3 @@ pre {
 .has-height-lg {
   min-height: 500px;
 }
-
-

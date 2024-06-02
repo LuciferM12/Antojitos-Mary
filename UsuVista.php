@@ -18,7 +18,8 @@
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
     
     <!-- Navbar -->
-    <nav class="custom-navbar navbar navbar-expand-lg navbar-dark fixed-top" data-spy="affix" data-offset-top="10">
+     <!-- Navbar -->
+     <nav class="custom-navbar navbar navbar-expand-lg navbar-dark fixed-top" data-spy="affix" data-offset-top="10">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -33,27 +34,70 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#gallary">Menú</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#book-table">Reservas</a>
-                </li>
+                <?php if (isset($_SESSION['rol'])) : ?>
+                    <li class="nav-item"><a class="nav-link" href="reservar.php">Reservaciones</a></li>
+                <?php endif; ?>
             </ul>
             <a class="navbar-brand m-auto" href="#">
                 <img src="assets/imgs/AM_Logo.png" class="brand-img" alt="">
                 <span class="brand-txt">Antojitos Mary</span>
             </a>
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#blog">Comprar<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#testmonial">Historial</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#contact">Perfil</a>
-                </li>
-                <li class="nav-item">
-                    <a href="login.html" class="btn btn-primary ml-xl-4">Cerrar Sesión</a>
-                </li>
+                <?php if (!isset($_SESSION['rol']) || $_SESSION['rol'] == "") : ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#blog">Blog<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testmonial">Reseñas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contáctanos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="login.php" class="btn btn-primary ml-xl-4">Inicia Sesión</a>
+                    </li>
+                <?php endif; ?>
+                <?php if ($_SESSION['rol'] === "cliente") : ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="perfil.php"><?php echo htmlspecialchars($_SESSION['nombre']); ?></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="assets/script/logout.php" class="btn btn-primary ml-xl-4">Cerrar Sesión</a>
+                    </li>
+                <?php endif; ?>
+                <?php if ($_SESSION['rol'] === "admin") : ?>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testmonial">Actualizar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testmonial">Reportes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="perfil.php"><?php echo htmlspecialchars($_SESSION['nombre']); ?></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="assets/script/logout.php" class="btn btn-primary ml-xl-4">Cerrar Sesión</a>
+                    </li>
+                <?php endif; ?>
+                <?php if ($_SESSION['rol'] === "vendedor") : ?>
+                   
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testmonial">Actualizar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testmonial">Reportes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testmonial">Venta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="perfil.php"><?php echo htmlspecialchars($_SESSION['nombre']); ?></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="assets/script/logout.php" class="btn btn-primary ml-xl-4">Cerrar Sesión</a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
     </nav>

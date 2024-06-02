@@ -51,10 +51,14 @@
     flex: 1 1 350px;
 }
 
-.formulario
-  {
-    width: 100%;
-  }
+.formulario {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem; /* Espacio entre los elementos */
+}
   
 .foto {
     width: 100%; 
