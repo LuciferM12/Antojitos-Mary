@@ -22,3 +22,8 @@
   <li><b>Menú diario dinámico:</b> Gracias la conexión con la base de datos de MySQL es posible que los empleados puedan agregar platillos al menú diario de manera dinámica para que estos se muestren en la página principal.</li>
 </ul>
 <hr>
+<h1 align="center">Interfaz</h1>
+<div align="center">
+  <img src="Antojitos.png" alt="Interface" title="Interface" width="600px">
+</div>
+<hr>
